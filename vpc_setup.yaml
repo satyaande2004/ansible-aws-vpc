@@ -30,26 +30,26 @@
       register: Aws_pubsunet1
 
     - name: crating Subnet2
-          ec2_vpc_subnet:
-              state: "{{state}}"
-              vpc_id: "{{vpcout.vpc.id}}"
-              region: "{{region}}"
-              az: "{{zone2}}"
-              cidr: "{{PubSub2Cdir}}"
-              map_public: yes
-              tags:
-                Name: Aws_pubsunet2
+      ec2_vpc_subnet:
+            state: "{{state}}"
+            vpc_id: "{{vpcout.vpc.id}}"
+            region: "{{region}}"
+            az: "{{zone2}}"
+            cidr: "{{PubSub2Cdir}}"
+            map_public: yes
+            tags:
+               Name: Aws_pubsunet2
       register: Aws_pubsunet2
 
     - name: crating Subnet3
-         ec2_vpc_subnet:
-             state: "{{state}}"
-             vpc_id: "{{vpcout.vpc.id}}"
-             region: "{{region}}"
-             az: "{{zone3}}"
-             cidr: "{{PubSub3Cdir}}"
-             map_public: yes
-             tags:
+      ec2_vpc_subnet:
+            state: "{{state}}"
+            vpc_id: "{{vpcout.vpc.id}}"
+            region: "{{region}}"
+            az: "{{zone3}}"
+            cidr: "{{PubSub3Cdir}}"
+            map_public: yes
+            tags:
                Name: Aws_pubsunet3
       register: Aws_pubsunet3
 

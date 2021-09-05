@@ -4,6 +4,7 @@
   tasks:
     - name: import vpc_varaible
       include_vars: var/aws_vpc
+    - name: creating VPC
       ec2_vpc_net:
           name: "{{vpc_name}}}"
           cidr_block: "{{vpcCdir}}}"
@@ -12,7 +13,7 @@
           dns_hostnames: yes
           state: "{{state}}}"
           tenancy: default
-    register: vpcout
+      register: vpcout
 
 
 

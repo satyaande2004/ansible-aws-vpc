@@ -1,0 +1,18 @@
+- hosts: localhost
+  connection: localhost
+  gather_facts: False
+  tasks:
+    - name: import vpc_varaible
+      include_vars: var/aws_vpc
+      ec2_vpc_net:
+          name: "{{vpc_name}}}"
+          cidr_block: "{{vpcCdir}}}"
+          region: "{{region}}}"
+          dns_support: yes
+          dns_hostnames: yes
+          state: "{{state}}}"
+          tenancy: default
+    register: vpcout
+
+
+

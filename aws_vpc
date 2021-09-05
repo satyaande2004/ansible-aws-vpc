@@ -1,0 +1,24 @@
+vpc_name: "Vprofile-vpc"
+
+#VPC range
+vpcCdir: '172.20.0.0/16'
+
+#subnet range
+PubSub1Cdir: 172.20.1.0/24
+PubSub1Cdir: 172.20.2.0/24
+PubSub1Cdir: 172.20.3.0/24
+PrivSub1Cdir: 172.20.4.0/24
+PrivSub1Cdir: 172.20.5.0/24
+PrivSub1Cdir: 172.20.6.0/24
+
+#Region
+region: "us-east-1"
+#Zones
+zone1: us-east-1a
+zone1: us-east-1b
+zone1: us-east-1c
+
+state: present
+
+
+

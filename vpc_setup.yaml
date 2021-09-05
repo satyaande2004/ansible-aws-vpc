@@ -53,6 +53,46 @@
                Name: Aws_pubsunet3
       register: Aws_pubsunet3
 
+    #private subnets
+
+
+    - name: crating private Subnet3
+      ec2_vpc_subnet:
+              state: "{{state}}"
+              vpc_id: "{{vpcout.vpc.id}}"
+              region: "{{region}}"
+              az: "{{zone1}}"
+              cidr: "{{PrivSub4Cdir}}"
+              map_public: yes
+              tags:
+                Name: Aws_privatesubenet4
+      register: Aws_privatesubenet4
+
+    - name: crating private Subnet5
+      ec2_vpc_subnet:
+                state: "{{state}}"
+                vpc_id: "{{vpcout.vpc.id}}"
+                region: "{{region}}"
+                az: "{{zone2}}"
+                cidr: "{{PrivSub5Cdir}}"
+                map_public: yes
+                tags:
+                   Name: Aws_privatesubenet5
+      register: Aws_privatesubenet5
+
+    - name: crating private Subnet6
+      ec2_vpc_subnet:
+                state: "{{state}}"
+                vpc_id: "{{vpcout.vpc.id}}"
+                region: "{{region}}"
+                az: "{{zone3}}"
+                cidr: "{{PrivSub6Cdir}}"
+                map_public: yes
+                tags:
+                   Name: Aws_privatesubenet6
+      register: Aws_privatesubenet6
+
+
 
 
 

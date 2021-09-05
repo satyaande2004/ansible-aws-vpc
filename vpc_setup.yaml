@@ -6,9 +6,9 @@
       include_vars: var/aws_vpc
     - name: creating VPC
       ec2_vpc_net:
-          name: "{{vpc_name}}}"
-          cidr_block: "{{vpcCdir}}}"
-          region: "{{region}}}"
+          name: "{{vpc_name}}"
+          cidr_block: "{{vpcCdir}}"
+          region: "{{region}}"
           dns_support: yes
           dns_hostnames: yes
           state: "{{state}}"

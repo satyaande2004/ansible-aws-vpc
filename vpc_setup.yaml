@@ -19,7 +19,7 @@
            var: vpcout
     - name: crating Subnet
       ec2_vpc_subnet:
-          state: "{{present}}"
+          state: "{{state}}"
           vpc_id: "{{vpcout.vpc.id}}"
           region: "{{region}}"
           zone: "{{zone1}}"

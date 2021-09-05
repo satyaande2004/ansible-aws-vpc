@@ -91,6 +91,31 @@
                 tags:
                    Name: Aws_privatesubenet6
       register: Aws_privatesubenet6
+# internet gateway
+    - name: crating internet Gatway for public subnets
+      ec2_vpc_igw:
+          state: "{{state}}"
+          vpc_id: "{{vpcout.vpc.id}}"
+          region: "{{region}}"
+          tags:
+              Name: Aws_IGW_public
+      register:  Aws_IGW_public
+  # Route table
+    - name: Creating public Route table
+      ec2_vpc_route_table:
+          vpc_id: "{{vpcout.vpc.id}}"
+          region: "{{region}}"
+          tags:
+            Name: Public_RT_table
+          subnets:
+            - "{{ Aws_pubsunet1.subnet.id }}"
+            - "{{ Aws_pubsunet2.subnet.id }}"
+            - "{{ Aws_pubsunet3.subnet_id }}"
+          routes:
+            - dest: 0.0.0.0/0
+              gateway_id: "{{ Aws_IGW_public.gateway_id }}"
+      register: Public_RT_table
+
 
 
 

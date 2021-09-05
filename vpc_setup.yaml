@@ -110,7 +110,7 @@
           subnets:
             - "{{ Aws_pubsunet1.subnet.id }}"
             - "{{ Aws_pubsunet2.subnet.id }}"
-            - "{{ Aws_pubsunet3.subnet_id }}"
+            - "{{ Aws_pubsunet3.subnet.id }}"
           routes:
             - dest: 0.0.0.0/0
               gateway_id: "{{ Aws_IGW_public.gateway_id }}"

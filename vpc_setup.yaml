@@ -139,7 +139,7 @@
                  - "{{ Aws_privatesubenet6.subnet.id }}"
                routes:
                  - dest: 0.0.0.0/0
-                   gateway_id: "{{ new_nat_gateway.gateway_id }}"
+                   gateway_id: "{{ new_nat_gateway.nat_gateway_id }}"
       register: Private_RT_table
 
 

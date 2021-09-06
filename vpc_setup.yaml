@@ -142,6 +142,23 @@
                    gateway_id: "{{ new_nat_gateway.nat_gateway_id }}"
       register: Private_RT_table
 
+    - set_fact:
+        vpcid: "{{vpcout.vpc.id}}"
+        Aws_pubsunet1: "{{ Aws_pubsunet1.subnet.id }}"
+        Aws_pubsunet2: "{{ Aws_pubsunet2.subnet.id }}"
+        Aws_pubsunet3: "{{ Aws_pubsunet3.subnet.id }}"
+        Aws_privatesubenet4: "{{ Aws_privatesubenet4.subnet.id }}"
+        Aws_privatesubenet5: "{{ Aws_privatesubenet5.subnet.id }}"
+        Aws_privatesubenet6: "{{ Aws_privatesubenet6.subnet.id }}"
+        Aws_IGW_public.gateway: "{{ Aws_IGW_public.gateway_id }}"
+        Public_RT_table: "{{Public_RT_table.route_table.id }}"
+        AWS_IGW_private.gateway: "{{ new_nat_gateway.nat_gateway_id }}"
+        Private_RT_table: "{{Private_RT_table.route_table.id }}"
+        cacheable: yes
+
+
+
+
 
 
 

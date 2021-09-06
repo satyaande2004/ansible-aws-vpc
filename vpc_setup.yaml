@@ -141,6 +141,24 @@
                  - dest: 0.0.0.0/0
                    gateway_id: "{{ new_nat_gateway.nat_gateway_id }}"
       register: Private_RT_table
+    - debug
+       var: "{{item}}"
+      loop:
+         - vpcout.vpc.id
+         - Aws_pubsunet1.subnet.id
+         - Aws_pubsunet2.subnet.id
+         - Aws_pubsunet3.subnet.id
+         - Aws_privatesubenet4.subnet.id
+         - Aws_privatesubenet5.subnet.id
+         - Aws_privatesubenet6.subnet.id
+         - Aws_IGW_public.gateway_id
+         - Public_RT_table.route_table.id
+         - new_nat_gateway.nat_gateway_id
+         - Private_RT_table.route_table.id
+
+
+
+
 
     - set_fact:
         vpcid: "{{vpcout.vpc.id}}"

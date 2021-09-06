@@ -56,7 +56,7 @@
     #private subnets
 
 
-    - name: crating private Subnet3
+    - name: crating private Subnet4
       ec2_vpc_subnet:
               state: "{{state}}"
               vpc_id: "{{vpcout.vpc.id}}"
@@ -116,7 +116,31 @@
               gateway_id: "{{ Aws_IGW_public.gateway_id }}"
       register: Public_RT_table
 
+ # create new NAT gateway if it is not exit
+    - name: Creating NAT Gateway if it is not exit
+      ec2_vpc_nat_gateway:
+          state: "{{state}}"
+          subnet_id: "{{Aws_pubsunet1.subnet.id}}"
+          wait: yes
+          region: "{{region}}"
+          if_exist_do_not_create: true
+      register: new_nat_gateway
+  # create private routetable and attach NAT gatway
 
+    - name: attch private subnets to nat gateway
+      ec2_vpc_route_table:
+               vpc_id: "{{vpcout.vpc.id}}"
+               region: "{{region}}"
+               tags:
+                 Name: Private_RT_table
+               subnets:
+                 - "{{ Aws_privatesubenet4.subnet.id }}"
+                 - "{{ Aws_privatesubenet5.subnet.id }}"
+                 - "{{ Aws_privatesubenet6.subnet.id }}"
+               routes:
+                 - dest: 0.0.0.0/0
+                   gateway_id: "{{ new_nat_gateway.gateway_id }}"
+      register: Private_RT_table
 
 
 

@@ -174,9 +174,9 @@
 
     - name: Create varaiblefile for output
       copy:
-        content: "vpcid: {{ vpcout.vpc.id }}\nAws_pubsunet1: {{ Aws_pubsunet1.subnet.id }}\nAws_pubsunet2: {{ Aws_pubsunet2.subnet.id }}\nAws_pubsunet3: {{ Aws_pubsunet3.subnet.id }}\nAws_privatesubenet4: {{ Aws_privatesubenet4.subnet.id }}\nAws_privatesubenet5: {{ Aws_privatesubenet5.subnet.id }}\nAws_privatesubenet6: {{ Aws_privatesubenet6.subnet.id }}\nAws_IGW_public: {{ Aws_IGW_public.gateway_id }}\nPublic_RT_table: {{ Public_RT_table.route_table.id }}\nnew_nat_gateway: {{ new_nat_gateway.nat_gateway_id }}\nPrivate_RT_table: {{ Private_RT_table.route_table.id }}\n"
+         content: "vpcid: {{ vpcout.vpc.id }}\nAws_pubsunet1: {{ Aws_pubsunet1.subnet.id }}\nAws_pubsunet2: {{ Aws_pubsunet2.subnet.id }}\nAws_pubsunet3: {{ Aws_pubsunet3.subnet.id }}\nAws_privatesubenet4: {{ Aws_privatesubenet4.subnet.id }}\nAws_privatesubenet5: {{ Aws_privatesubenet5.subnet.id }}\nAws_privatesubenet6: {{ Aws_privatesubenet6.subnet.id }}\nAws_IGW_public: {{ Aws_IGW_public.gateway_id }}\nPublic_RT_table: {{ Public_RT_table.route_table.id }}\nnew_nat_gateway: {{ new_nat_gateway.nat_gateway_id }}\nPrivate_RT_table: {{ Private_RT_table.route_table.id }}\n"
 
-        dest: var/output_vars
+         dest: var/output_vars
 
 
 

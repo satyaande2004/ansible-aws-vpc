@@ -4,3 +4,20 @@
   connection: local
   gather_facts: no
   tasks:
+    - name: import VPC setup variable
+      include_vars: vars/output_vars
+    - name: import vprofile setup variable
+      include_vars: vars/vprostacksetup
+    - name: Create vprofile ec2 key
+      ec2_key:
+                name: vprofile-key
+                region: "{{region}}"
+      register: vprokey_out
+
+    - name: Save private key into file bastion-key.pem
+      copy:
+                content: "{{vprokey_out.key.private_key}}"
+                dest: "./loginkeypro.pem"
+                mode: 0600
+      when: vprokey_out.changed
+

@@ -1,5 +1,5 @@
 ---
-- import_playbook: aws_vpcsetup.yaml
+- import_playbook: aws-vpcsetup.yaml
 - import_playbook: bastion-instance.yml
 
 #importing the files

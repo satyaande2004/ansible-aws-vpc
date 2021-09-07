@@ -24,7 +24,7 @@
       ec2_group:
         name: vproELB-sg
         description: allow all on port 80
-        vpc_id: "{{vpcout.vpc.id}}"
+        vpc_id: "{{vpcid}}"
         region: "{{ region }}"
         rules:
           - proto: tcp
@@ -38,7 +38,7 @@
       ec2_group:
              name: vproStack-sg
              description: allow all on port 22
-             vpc_id: "{{vpcout.vpc.id}}"
+             vpc_id: "{{vpcid}}"
              region: "{{ region }}"
              purge_rules: no
              rules:
@@ -56,7 +56,7 @@
       ec2_group:
                   name: vproStack-sg
                   description: allow all on port 22
-                  vpc_id: "{{vpcout.vpc.id}}"
+                  vpc_id: "{{vpcid}}"
                   region: "{{ region }}"
                   purge_rules: no
                   rules:

@@ -20,7 +20,7 @@
                 dest: "./loginkeypro.pem"
                 mode: 0600
       when: vprokey_out.changed
-    - name: crate security group for Loadbalancer
+    - name: crate security group for Loadbalancer80
       ec2_group:
         name: vproELB-sg
         description: allow all on port 80
@@ -28,13 +28,12 @@
         region: "{{ region }}"
         rules:
           - proto: tcp
-            ports:
             from_port: 80
             to_port: 80
             cidr_ip: 0.0.0.0/0
       register: vproELB-sg_out
 
-    - name: crate security group for Loadbalancer
+    - name: crate security group for vprofilestack
       ec2_group:
              name: vproStack-sg
              description: allow all on port 22

@@ -60,7 +60,7 @@
         path: /vars/output_vars
         backup: yes
         block: |
-          BastionSGid: "{{bastionHost_out.group_id}}"
+          BastionSGid: {{bastionHost_out.group_id}}
 
 
 

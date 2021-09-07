@@ -52,8 +52,8 @@
                  group_id: "{{BastionSGid}}"
       register: vproStack-sg_out
 
-     - name: crate security group with ownSG id
-       ec2_group:
+    - name: crate security group with ownSG id
+      ec2_group:
                   name: vproStack-sg
                   description: allow all on port 22
                   vpc_id: "{{vpcout.vpc.id}}"

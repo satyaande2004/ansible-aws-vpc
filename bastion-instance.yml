@@ -57,7 +57,7 @@
       register: bastionHost_out
     - name: insert/update in output_vars
       blockinfile:
-        path: /vars/output_vars
+        path: vars/output_vars
         backup: yes
         block: |
           BastionSGid: {{BastionSG_out.group_id}}

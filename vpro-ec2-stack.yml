@@ -49,7 +49,7 @@
                  from_port: 22
                  to_port: 22
                  group_id: "{{BastionSGid}}"
-      register: vproStack-sg_out
+      register: vproStack_out
 
     - name: crate security group with ownSG id
       ec2_group:
@@ -60,7 +60,7 @@
                   purge_rules: no
                   rules:
                     - proto: all
-                      group_id: "{{vproStack-sg_out.group_id}}}"
+                      group_id: "{{vproStack_out.group_id}}}"
 
 
 

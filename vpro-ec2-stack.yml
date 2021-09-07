@@ -50,7 +50,7 @@
                  from_port: 22
                  to_port: 22
                  group_id: "{{BastionSGid}}"
-       register: vproStack-sg_out
+      register: vproStack-sg_out
 
      - name: crate security group with ownSG id
        ec2_group:

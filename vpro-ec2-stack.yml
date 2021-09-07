@@ -29,7 +29,8 @@
         rules:
           - proto: tcp
             ports:
-            - 80
+            from_port: 80
+            to_port: 80
             cidr_ip: 0.0.0.0/0
       register: vproELB-sg_out
 
@@ -50,4 +51,17 @@
                  to_port: 22
                  group_id: "{{BastionSGid}}"
        register: vproStack-sg_out
+
+     - name: crate security group with ownSG id
+       ec2_group:
+                  name: vproStack-sg
+                  description: allow all on port 22
+                  vpc_id: "{{vpcout.vpc.id}}"
+                  region: "{{ region }}"
+                  purge_rules: no
+                  rules:
+                    - proto: all
+                    group_id: "{{vproStack-sg_out.group_id}}}"
+
+
 

@@ -76,7 +76,7 @@
             Name: "web01"
             project: vprofile
             Owner: satya
-         exec_count: 1
+         exact_count: 1
          count_tag:
              Name: "web01"
              project: vprofile
@@ -97,7 +97,7 @@
                 Name: "app01"
                 project: vprofile
                 Owner: satya
-             exec_count: 1
+             exact_count: 1
              count_tag:
                  Name: "app01"
                  project: vprofile
@@ -118,7 +118,7 @@
                    Name: "mc01"
                    project: vprofile
                    Owner: satya
-                exec_count: 1
+                exact_count: 1
                 count_tag:
                     Name: "mc01"
                     project: vprofile
@@ -140,7 +140,7 @@
                       Name: "rmq01"
                       project: vprofile
                       Owner: satya
-                   exec_count: 1
+                   exact_count: 1
                    count_tag:
                        Name: "rmq01"
                        project: vprofile
@@ -162,11 +162,11 @@
                           Name: "db01"
                           project: vprofile
                           Owner: satya
-                       exec_count: 1
+                       exact_count: 1
                        count_tag:
                            Name: "db01"
                            project: vprofile
                            Owner: satya
                        group_id: "{{vproStackSG_out.group_id}}"
-      register: rmq01_out
+      register: db01_out
 

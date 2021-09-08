@@ -75,12 +75,12 @@
          instance_tags:
             Name: "web01"
             project: vprofile
-            owner: satya
+            Owner: satya
          exec_count: 1
          count_tag:
              Name: "web01"
              project: vprofile
-             owner: satya
+             Owner: satya
          group_id: "{{vproStackSG_out.group_id}}"
       register: web01_out
     - name: Creating tomcat app01
@@ -96,12 +96,12 @@
              instance_tags:
                 Name: "app01"
                 project: vprofile
-                owner: satya
+                Owner: satya
              exec_count: 1
              count_tag:
                  Name: "app01"
                  project: vprofile
-                 owner: satya
+                 Owner: satya
              group_id: "{{vproStackSG_out.group_id}}"
       register: app01_out
     - name: Creating memcache mc01
@@ -117,12 +117,12 @@
                 instance_tags:
                    Name: "mc01"
                    project: vprofile
-                   owner: satya
+                   Owner: satya
                 exec_count: 1
                 count_tag:
                     Name: "mc01"
                     project: vprofile
-                    owner: satya
+                    Owner: satya
                 group_id: "{{vproStackSG_out.group_id}}"
       register: mc01_out
 
@@ -139,12 +139,12 @@
                    instance_tags:
                       Name: "rmq01"
                       project: vprofile
-                      owner: satya
+                      Owner: satya
                    exec_count: 1
                    count_tag:
                        Name: "rmq01"
                        project: vprofile
-                       owner: satya
+                       Owner: satya
                    group_id: "{{vproStackSG_out.group_id}}"
       register: rmq01_out
 
@@ -161,12 +161,12 @@
                        instance_tags:
                           Name: "db01"
                           project: vprofile
-                          owner: satya
+                          Owner: satya
                        exec_count: 1
                        count_tag:
                            Name: "db01"
                            project: vprofile
-                           owner: satya
+                           Owner: satya
                        group_id: "{{vproStackSG_out.group_id}}"
       register: rmq01_out
 

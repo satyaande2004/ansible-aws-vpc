@@ -62,5 +62,27 @@
            rules:
              - proto: all
                group_id: "{{vproStackSG_out.group_id}}"
+    - name: Creating Nginx web01
+      ec2:
+         key_name: vprokey
+         region: "{{region}}"
+         instance_type: t2.micro
+         image: "{{nginx_ami}}"
+         vpc_id: "{{vpcid}}"
+         vpc_subnet_id: "{{privsub1id}}"
+         wait: yes
+         wait_time: 300
+         instance_tags:
+            Name: "web01"
+            project: "vprofile"
+            owner: satya
+         exec_count: 1
+         count_tag:
+             Name: "web01"
+             project: "vprofile"
+             owner: satya
+         group_id: "{{vproStackSG_out.group_id}}"
+      register: web01_out
+
 
 

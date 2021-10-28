@@ -14,30 +14,30 @@
     #  include_vars: vars/secret.yml
 
 
-   - name: creating security group
-     ec2_group:
-       name: "{{ sg }}"
-       description: "{{ sg_des }}"
-       vpc_id: "{{ vpc.vpc.id }}"
-       region: "{{ region_name }}"
-       rules:
-        - proto: "{{ proto1 }}"
-          from_port: "{{ port1 }}"
-          to_port: "{{ port1 }}"
-          cidr_ip: "{{ cidr4 }}"
-        - proto: "{{ proto1 }}"
-          from_port: "{{ port2 }}"
-          to_port: "{{ port2 }}"
-          cidr_ip: "{{ cidr4 }}"
-        - proto: "{{ proto1 }}"
-          from_port: "{{ port3 }}"
-          to_port: "{{ port3 }}"
-          cidr_ip: "{{ cidr4 }}"
-        - proto: "{{ proto2 }}"
-          from_port: "{{ port4 }}"
-          to_port: "{{ port4 }}"
-          cidr_ip: "{{ cidr4 }}"
-     register: sg
+    - name: creating security group
+      ec2_group:
+        name: "{{ sg }}"
+        description: "{{ sg_des }}"
+        vpc_id: "{{ vpc.vpc.id }}"
+        region: "{{ region_name }}"
+        rules:
+          - proto: "{{ proto1 }}"
+            from_port: "{{ port1 }}"
+            to_port: "{{ port1 }}"
+            cidr_ip: "{{ cidr4 }}"
+          - proto: "{{ proto1 }}"
+            from_port: "{{ port2 }}"
+            to_port: "{{ port2 }}"
+            cidr_ip: "{{ cidr4 }}"
+          - proto: "{{ proto1 }}"
+            from_port: "{{ port3 }}"
+            to_port: "{{ port3 }}"
+            cidr_ip: "{{ cidr4 }}"
+          - proto: "{{ proto2 }}"
+            from_port: "{{ port4 }}"
+            to_port: "{{ port4 }}"
+            cidr_ip: "{{ cidr4 }}"
+      register: sg
 
 
   - name: "Create a role and attach a managed policy called 'eks cluster'"

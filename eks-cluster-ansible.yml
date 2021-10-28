@@ -2,97 +2,109 @@
   connection: local
   gather_facts: False
   tasks:
-- name: creating security group
-  ec2_group:
-    name: "{{ sg }}"
-    description: "{{ sg_des }}"
-    vpc_id: "{{ vpc.vpc.id }}"
-    region: "{{ region_name }}"
-    rules:
-      - proto: "{{ proto1 }}"
-        from_port: "{{ port1 }}"
-        to_port: "{{ port1 }}"
-        cidr_ip: "{{ cidr4 }}"
-      - proto: "{{ proto1 }}"
-        from_port: "{{ port2 }}"
-        to_port: "{{ port2 }}"
-        cidr_ip: "{{ cidr4 }}"
-      - proto: "{{ proto1 }}"
-        from_port: "{{ port3 }}"
-        to_port: "{{ port3 }}"
-        cidr_ip: "{{ cidr4 }}"
-      - proto: "{{ proto2 }}"
-        from_port: "{{ port4 }}"
-        to_port: "{{ port4 }}"
-        cidr_ip: "{{ cidr4 }}"
-  register: sg
+    - name: Import  main Variables
+      include_vars: vars/main.yml
+    - name: import policy1 setup variable
+      include_vars: vars/policy1.json
+    - name: import policy2 setup variable
+      include_vars: vars/policy2.json
+    - name: import sc setup variable
+      include_vars: vars/sc.yml
+   # - name: import secret setup variable
+    #  include_vars: vars/secret.yml
 
 
-- name: "Create a role and attach a managed policy called 'eks cluster'"
-  iam_role:
-    name: "{{ role1 }}"
-    assume_role_policy_document: "{{ lookup('file','policy1.json') }}"
-    managed_policy:
+   - name: creating security group
+     ec2_group:
+       name: "{{ sg }}"
+       description: "{{ sg_des }}"
+       vpc_id: "{{ vpc.vpc.id }}"
+       region: "{{ region_name }}"
+       rules:
+        - proto: "{{ proto1 }}"
+          from_port: "{{ port1 }}"
+          to_port: "{{ port1 }}"
+          cidr_ip: "{{ cidr4 }}"
+        - proto: "{{ proto1 }}"
+          from_port: "{{ port2 }}"
+          to_port: "{{ port2 }}"
+          cidr_ip: "{{ cidr4 }}"
+        - proto: "{{ proto1 }}"
+          from_port: "{{ port3 }}"
+          to_port: "{{ port3 }}"
+          cidr_ip: "{{ cidr4 }}"
+        - proto: "{{ proto2 }}"
+          from_port: "{{ port4 }}"
+          to_port: "{{ port4 }}"
+          cidr_ip: "{{ cidr4 }}"
+     register: sg
+
+
+  - name: "Create a role and attach a managed policy called 'eks cluster'"
+     iam_role:
+     name: "{{ role1 }}"
+     assume_role_policy_document: "{{ lookup('file','policy1.json') }}"
+     managed_policy:
       - "{{ policy1 }}"
-  register: role1
+     register: role1
 
-- name: "Create a role and attach a managed policy called 'ec2,eks_worker_node,& container registry'"
-  iam_role:
-    name: "{{ role2 }}"
-    assume_role_policy_document: "{{ lookup('file','policy2.json') }}"
-    managed_policy:
+  - name: "Create a role and attach a managed policy called 'ec2,eks_worker_node,& container registry'"
+     iam_role:
+     name: "{{ role2 }}"
+     assume_role_policy_document: "{{ lookup('file','policy2.json') }}"
+     managed_policy:
       - "{{ policy2 }}"
       - "{{ policy3 }}"
       - "{{ policy4 }}"
       - "{{ policy5 }}"
-  register: role2
+    register: role2
 
-- name: Create an EKS cluster
-  aws_eks_cluster:
-    name: "{{ cluster_name }}"
-    version: "{{ k8s_version }}"
-    region: "{{ region_name }}"
-    subnets:
+  - name: Create an EKS cluster
+     aws_eks_cluster:
+     name: "{{ cluster_name }}"
+     version: "{{ k8s_version }}"
+     region: "{{ region_name }}"
+     subnets:
       - "{{ pubsub1_out.subnet.id }}"
       - "{{ pubsub2_out.subnet.id }}"
-    security_groups: "{{ sg.group_id }}"
-    role_arn: "{{ role1.arn }}"
-    state: present
+     security_groups: "{{ sg.group_id }}"
+     role_arn: "{{ role1.arn }}"
+     state: present
 
-- name: Pause for 15 minutes to build MasterNode
-  pause:
-    minutes: 15
+  - name: Pause for 15 minutes to build MasterNode
+     pause:
+     minutes: 15
 
-- name: Configuring Worker Nodes
-  command: "aws eks create-nodegroup --cluster-name {{ cluster_name }} --nodegroup-name {{ node_grp }} --disk-size {{ size }} --subnets {{ subnet1.subnet.id }} {{ subnet2.subnet.id }} --scaling-config minSize=1,maxSize=3,desiredSize=3 --instance-types {{ instance }}  --ami-type {{ ami }} --node-role {{ role2.arn }}  --tags KeyName1=Worker_Nodes,KeyName2=EKS"
+  - name: Configuring Worker Nodes
+     command: "aws eks create-nodegroup --cluster-name {{ cluster_name }} --nodegroup-name {{ node_grp }} --disk-size {{ size }} --subnets {{ subnet1.subnet.id }} {{ subnet2.subnet.id }} --scaling-config minSize=1,maxSize=3,desiredSize=3 --instance-types {{ instance }}  --ami-type {{ ami }} --node-role {{ role2.arn }}  --tags KeyName1=Worker_Nodes,KeyName2=EKS"
 
-- name: Pause for 2 minutes to build WorkerNodes
-  pause:
-    minutes: 2
+  - name: Pause for 2 minutes to build WorkerNodes
+    pause:
+     minutes: 2
 
-- name: Configuring Yum repo for k8s
-  yum_repository:
-    name: "{{ repo_name }}"
-    description: "{{ repo_desc }}"
-    baseurl: "{{ b_url }}"
-    enabled: yes
-    gpgcheck: yes
-    repo_gpgcheck: yes
-    gpgkey: "{{ g_key }}"
+  - name: Configuring Yum repo for k8s
+     yum_repository:
+     name: "{{ repo_name }}"
+     description: "{{ repo_desc }}"
+     baseurl: "{{ b_url }}"
+     enabled: yes
+     gpgcheck: yes
+     repo_gpgcheck: yes
+     gpgkey: "{{ g_key }}"
 
-- name: installation of kubectl
-  package:
-    name: "kubectl"
-    state: present
+  - name: installation of kubectl
+     package:
+     name: "kubectl"
+     state: present
 
-- name: Getting Cluster Details
-  command: "aws eks --region {{ region_name }} update-kubeconfig --name {{ cluster_name }}"
+  - name: Getting Cluster Details
+     command: "aws eks --region {{ region_name }} update-kubeconfig --name {{ cluster_name }}"
 
-- name: storing secret file
-  command: "kubectl apply -f /vars/secret.yml"
+  - name: storing secret file
+     command: "kubectl apply -f /vars/secret.yml"
 
-- name: creating storage class
-  command: "kubectl apply -f /vars/sc.yml"
+  - name: creating storage class
+     command: "kubectl apply -f /vars/sc.yml"
 
 # name: creating wordpress deployment
 #  command: "kubectl create -f /vars/wordpress.yml"

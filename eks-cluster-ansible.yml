@@ -20,7 +20,7 @@
       ec2_group:
         name: "{{ sg }}"
         description: "{{ sg_des }}"
-        vpc_id: "{{ vpc.vpc.id }}"
+        vpc_id: "{{ vpcout.vpc.id }}"
         region: "{{ region_name }}"
         rules:
           - proto: "{{ proto1 }}"
@@ -67,8 +67,8 @@
        version: "{{ k8s_version }}"
        region: "{{ region_name }}"
        subnets:
-       - "{{ subnet1.subnet.id }}"
-       - "{{ subnet2.subnet.id }}"
+       - "{{ pubsub1_out.subnet.id }}"
+       - "{{ pubsub2_out.subnet.id }}"
        security_groups: "{{ sg.group_id }}"
        role_arn: "{{ role1.arn }}"
        state: present

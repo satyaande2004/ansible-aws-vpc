@@ -20,7 +20,7 @@
       ec2_group:
         name: "{{ sg }}"
         description: "{{ sg_des }}"
-        vpc_id: "{{ vpcout.vpc.id }}"
+        vpc_id: "{{ vpcid }}"
         region: "{{ region_name }}"
         rules:
           - proto: "{{ proto1 }}"

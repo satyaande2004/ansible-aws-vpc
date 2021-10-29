@@ -57,7 +57,7 @@
           - "{{ policy3 }}"
           - "{{ policy4 }}"
           - "{{ policy5 }}"
-       register: role2
+      register: role2
 
     - name: Create an EKS cluster
       aws_eks_cluster:

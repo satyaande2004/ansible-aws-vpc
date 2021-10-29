@@ -61,7 +61,7 @@
         assume_role_policy_document: "{{ lookup('file','vars/policy1.json') }}"
         managed_policy:
           - "{{ policy1 }}"
-        register: role1
+      register: role1
 
     - name: "Create a role and attach a managed policy called 'ec2,eks_worker_node,& container registry'"
       community.aws.iam_role:

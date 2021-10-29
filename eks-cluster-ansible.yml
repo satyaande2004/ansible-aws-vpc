@@ -24,19 +24,19 @@
           - proto: "{{ proto1 }}"
             from_port: "{{ port1 }}"
             to_port: "{{ port1 }}"
-            cidr_ip: "{{ cidr4 }}"
+
           - proto: "{{ proto1 }}"
             from_port: "{{ port2 }}"
             to_port: "{{ port2 }}"
-            cidr_ip: "{{ cidr4 }}"
+
           - proto: "{{ proto1 }}"
             from_port: "{{ port3 }}"
             to_port: "{{ port3 }}"
-            cidr_ip: "{{ cidr4 }}"
+
           - proto: "{{ proto2 }}"
             from_port: "{{ port4 }}"
             to_port: "{{ port4 }}"
-            cidr_ip: "{{ cidr4 }}"
+
       register: sg
 
 

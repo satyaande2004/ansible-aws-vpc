@@ -2,6 +2,8 @@
   connection: local
   gather_facts: False
   tasks:
+    - name: import sc setup variable
+      include_vars: vars/output_vars
     - name: Import  main Variables
       include_vars: vars/main.yml
     - name: import policy1 setup variable

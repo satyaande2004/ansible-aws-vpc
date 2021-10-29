@@ -14,7 +14,20 @@
       include_vars: vars/sc.yml
    # - name: import secret setup variable
     #  include_vars: vars/secret.yml
-
+    - name: Configuring aws credentials
+      blockinfile:
+        path: /root/.aws/credentials
+        block: |
+          [default]
+          aws_access_key_id = "{{ access_key }}"
+          aws_secret_access_key = "{{ secret_key }}"
+    - name: Configuring aws config
+      blockinfile:
+        path: /root/.aws/config
+        block: |
+          [default]
+          region = "{{ region_name }}"
+          output = "{{ op }}"
 
     - name: creating security group
       ec2_group:
@@ -45,7 +58,7 @@
     - name: "Create a role and attach a managed policy called 'eks cluster'"
       iam_role:
         name: "{{ role1 }}"
-        assume_role_policy_document: "{{ lookup('file','policy1.json') }}"
+        assume_role_policy_document: "{{ lookup('file','vars/policy1.json') }}"
         managed_policy:
           - "{{ policy1 }}"
         register: role1
@@ -53,7 +66,7 @@
     - name: "Create a role and attach a managed policy called 'ec2,eks_worker_node,& container registry'"
       iam_role:
         name: "{{ role2 }}"
-        assume_role_policy_document: "{{ lookup('file','policy2.json') }}"
+        assume_role_policy_document: "{{ lookup('file','vars/policy2.json') }}"
         managed_policy:
           - "{{ policy2 }}"
           - "{{ policy3 }}"
